@@ -1,0 +1,44 @@
+<div class="row">
+  <div class="col-sm-12">
+
+    <app-navegador-principal></app-navegador-principal>
+
+  </div>
+
+</div>
+
+
+<div class="row">
+
+  <div class="col-sm-12">
+
+    <form class="example" style="margin:auto;max-width:300px">
+      <input type="text" (keyup)="onNameKeyUp($event)" placeholder="Buscar.." name="search2">
+      <button type="button" (click)="getProfile()"><i class="fa fa-search"></i></button>
+    </form>
+
+  </div>
+
+
+</div>
+
+<div class="row">
+
+  <div class="col-sm-12">
+
+    <app-marca-general [resultadosMar]="respuestaServerDesa"></app-marca-general>
+
+  </div>
+
+  <div class="col-sm-12">
+
+    <app-juego-detalle [resultadosJueg]="respuestaServerJueg"></app-juego-detalle>
+
+  </div>
+
+
+
+</div>
+
+
+
