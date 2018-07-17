@@ -9,7 +9,7 @@ import {HttpClient} from "@angular/common/http";
 })
 export class CarritoComponent implements OnInit {
 
-  datosFactura = []
+  datosFactura : {nombre: string, apellido: string, direccion: string}
 
   listaCompra = []
 
@@ -27,13 +27,21 @@ export class CarritoComponent implements OnInit {
 
     this.items = this.listaCompra.length
 
-    //console.log(this.datosFactura)
+    this.calcularTotal()
+
+    this.ocultar()
 
   }
 
-  eliminarItem(id){
+  eliminarItem(idArreglo, idModelo){
 
-    this.listaCompra.splice(id,1)
+    this.total -= parseFloat(this.listaCompra[idArreglo].precio)
+
+    this.listaCompra.splice(idArreglo,1)
+
+    this.cambiarEstado(idModelo)
+
+    this.ocultar();
 
     this.mandarDatos();
 
@@ -45,8 +53,51 @@ export class CarritoComponent implements OnInit {
 
   }
 
+  private calcularTotal() {
+    this.total = this.listaCompra.reduce((acumulador, actual) => {
+      acumulador += parseFloat(actual.precio);
+      return acumulador;
+    }, 0);
+  }
 
+  cambiarEstado(id){
+    this.httpClient.put(`http://localhost:1337/modelo/${id}`, {
 
+      estado : true
+
+    }).subscribe(
+      res => {
+        //console.log(res);
+      }
+    );
+  }
+
+  completarOrden(){
+
+    for(let i=0; i<this.listaCompra.length; i++){
+
+      this.cambiarEstado(this.listaCompra[i].id)
+
+    }
+
+    this.total = 0
+
+    this.listaCompra = []
+
+    this.mandarDatos();
+
+  }
+
+  ocultar(){
+
+    if(this.listaCompra.length == 0){
+
+      var mostrarListModelos = <HTMLFormElement>document.getElementById('modelosComprar');
+      mostrarListModelos.style.display = "none";
+
+    }
+
+  }
 
 
 }

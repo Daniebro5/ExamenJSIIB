@@ -24,7 +24,7 @@ module.exports = {
       required: true
     },
 
-    imagenDesarrolladora: {
+    imagenMarca: {
       type: 'string',
       required: true
     },

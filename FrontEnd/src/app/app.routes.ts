@@ -2,7 +2,7 @@ import {Routes} from "@angular/router";
 import {NavegadorComponent} from "./navegador/navegador.component";
 import {CarritoComponent} from "./carrito/carrito.component";
 import {MarcaComponent} from "./marca/marca.component";
-import {JuegoComponent} from "./modelo/juego.component";
+import {ModeloComponent} from "./modelo/modelo.component";
 
 export const RUTAS_APP: Routes = [
   {
@@ -15,8 +15,8 @@ export const RUTAS_APP: Routes = [
   },
 
   {
-    path: 'marca/:id/modelo/:idJuego',
-    component: JuegoComponent
+    path: 'marca/:id/modelo/:idModelo',
+    component: ModeloComponent
   },
   {
     path: 'marca/:id',
@@ -24,8 +24,8 @@ export const RUTAS_APP: Routes = [
     children:
     [{
 
-      path: 'modelo/:idJuego',
-      component: JuegoComponent
+      path: 'modelo/:idModelo',
+      component: ModeloComponent
 
     }]
   },

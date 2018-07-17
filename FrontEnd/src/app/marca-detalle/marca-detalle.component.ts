@@ -27,7 +27,7 @@ export class MarcaDetalleComponent implements OnInit {
   }
 
   obtenerDatos(id){
-    this.httpClient.get(`http://localhost:1337/desarrolladora?id=${id}`)
+    this.httpClient.get(`http://localhost:1337/marca?id=${id}`)
       .subscribe(
         (data:any[]) => {
 

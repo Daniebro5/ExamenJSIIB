@@ -12,18 +12,20 @@ export class NavegadorComponent implements OnInit {
 
   buscar: string = ""
 
-  respuestaServerDesa = []
+  respuestaServerMod = []
 
-  respuestaServerJueg = []
+  respuestaServerMarc = []
 
   constructor(private httpClient: HttpClient,private httpClient2: HttpClient, private data: ServicioMarcasService){
   }
 
   ngOnInit() {
 
-    this.data.mensajeActual.subscribe(mensaje => this.respuestaServerDesa = mensaje)
+    this.data.mensajeActual.subscribe(mensaje => this.respuestaServerMod = mensaje)
 
-    this.data.mensajeActual2.subscribe(mensaje => this.respuestaServerJueg = mensaje)
+    this.data.mensajeActual2.subscribe(mensaje => this.respuestaServerMarc = mensaje)
+
+    this.ocultarElementos()
 
   }
 
@@ -35,33 +37,56 @@ export class NavegadorComponent implements OnInit {
 
   getProfile(){
 
-    this.httpClient.get(`http://localhost:1337/desarrolladora?nombre=${this.buscar}`)
+    this.httpClient.get(`http://localhost:1337/marca?where={"nombre":{"contains":"${this.buscar}"}}`)
       .subscribe(
         (data:any[]) => {
 
-          this.respuestaServerDesa = data
-          console.log(this.respuestaServerDesa)
+          this.respuestaServerMod = data
+
         }
 
       )
 
-    this.httpClient2.get(`http://localhost:1337/juego?nombreJuego=${this.buscar}`)
+    this.httpClient2.get(`http://localhost:1337/modelo?where={"nombreModelo":{"contains":"${this.buscar}"}}`)
       .subscribe(
         (data:any[]) => {
 
-          this.respuestaServerJueg = data
-          //console.log(this.respuestaServerJueg)
+          this.respuestaServerMarc = data
+
         }
 
       )
 
     this.mandarDatos()
 
+    this.mostrarElementos()
+
   }
+
   mandarDatos(){
 
-    this.data.cambiarMensaje(this.respuestaServerDesa)
-    this.data.cambiarMensaje2(this.respuestaServerJueg)
+    this.data.cambiarMensaje(this.respuestaServerMod)
+    this.data.cambiarMensaje2(this.respuestaServerMarc)
+  }
+
+  mostrarElementos() {
+
+    var mostrarLabelMarca = <HTMLFormElement>document.getElementById('marca');
+    mostrarLabelMarca.style.display = "block";
+
+    var mostrarLabelModelo = <HTMLFormElement>document.getElementById('modelo');
+    mostrarLabelModelo.style.display = "block";
+
+  }
+
+  ocultarElementos() {
+
+    var mostrarLabelMarca = <HTMLFormElement>document.getElementById('marca');
+    mostrarLabelMarca.style.display = "none";
+
+    var mostrarLabelModelo = <HTMLFormElement>document.getElementById('modelo');
+    mostrarLabelModelo.style.display = "none";
+
   }
 
 

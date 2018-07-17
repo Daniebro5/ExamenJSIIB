@@ -8,7 +8,7 @@ import {ServicioMarcasService} from "../servicio-marcas.service";
 })
 export class NavegadorPrincipalComponent implements OnInit {
 
-  items
+  items: any
 
   constructor(private data: ServicioMarcasService) {
 

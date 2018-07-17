@@ -5,16 +5,24 @@
 
   </div>
 
+
+</div>
+<div class="row">
+  <div class="col-sm-12">
+    <br>
+    <h2 style="padding-left: 40px">Detalle de la marca:</h2>
+  </div>
 </div>
 
 <div class="row"  style="margin-left: 20px; margin-top: 20px">
   <div class="col-sm-2" *ngFor="let info of marcaDetalle; let indice = index">
-    <div class="card" style="width: 500px;">
+    <div class="card" style="width: 500px; margin-left: 200px">
       <div class="card-body">
-        <h5 class="card-title">{{info.nombre}}</h5>
+        <h5 class="card-title" style="text-align: center">{{info.nombre}}</h5>
         <h6 class="card-subtitle mb-2 text-muted">Ubicacion: {{info.ubicacion}}</h6>
         <h6 class="card-subtitle mb-2 text-muted">Fecha de Creación: {{info.fechaCreacion}}</h6>
-        <img src={{info.imagenMarca}} alt="Card image cap">
+        <h6 class="card-subtitle mb-2 text-muted">Numero de modelos: {{info.modelos.length}}</h6>
+        <img class="card-img-top" src={{info.imagenMarca}} alt="Card image cap" style="padding-left: 5px">
       </div>
     </div>
   </div>
@@ -24,7 +32,7 @@
 
   <div class="col-sm-12">
 
-    <app-juego-detalle [resultadosJueg]="datosHijos"></app-juego-detalle>
+    <app-modelo-detalle [resultadosMarc]="datosHijos"></app-modelo-detalle>
 
   </div>
 
